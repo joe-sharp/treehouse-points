@@ -1,0 +1,117 @@
+---
+---
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+// properties
+$color-background: #f9f9f9;
+$color-primary: #222222;
+$size-circle: 12.5em;
+$size-thickness: 2.5em;
+$size-inner: $size-circle - $size-thickness * 2;
+
+// resets
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: $color-primary;
+}
+
+// clearfix
+.group:after {content:"";display:table;clear:both;}
+
+// general
+body {
+  font-family: "Open Sans", Arial;
+  background: $color-background;
+
+  a {
+    text-decoration: none;
+  }
+
+  .team-treehouse {
+
+    h1, h2 {
+      text-align: center;
+    }
+    h2 {
+      font-weight: normal;
+    }
+  }
+}
+
+
+// pie chart
+.pieChart {
+  width: $size-circle + 13em;
+  margin: 0 auto;
+  padding-top: 1em;
+}
+
+// pie
+.pie {
+  height: $size-circle;
+  width: $size-circle;
+  position: relative;
+  float:left;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1;
+    width: $size-inner;
+    height: $size-inner;
+    background: $color-background;
+    border-radius: 50%;
+    top: $size-thickness;
+    left: $size-thickness;
+  }
+}
+
+.slice {
+  position: absolute;
+  width: $size-circle;
+  height: $size-circle;
+  clip: rect(0px, $size-circle, $size-circle, $size-circle/2);
+  animation: bake-pie 1s;
+
+  span {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    width: $size-circle;
+    height: $size-circle;
+    border-radius: 50%;
+    clip: rect(0px, $size-circle, $size-circle, $size-circle/2);
+  }
+}
+
+// legend
+.legend {
+  width: 13em;
+  padding-left: 1em;
+  float:left;
+
+  ul {
+    list-style-type: none;
+    list-style-position: inside;
+    font-size: 0.8em;
+  }
+  li {
+    height: 1.25em;
+    margin-bottom: 0.7em;
+    padding-left: 0.5em;
+    border-left: 1.25em solid black;
+  }
+  em {
+    font-style: normal;
+  }
+  span {
+    float: right;
+    font-weight: bold;
+  }
+}
