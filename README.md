@@ -1,2 +1,2 @@
 # treehouse-points
-Widget to display Treehouse widgets on the web
+Widget to display Treehouse points on the web
