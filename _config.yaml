@@ -1,30 +1,3 @@
-# Color palette for points categories
-colors:
-  CSS: "#3659A2"
-  HTML: "#3659A2"
-  JavaScript: "#3659A2"
-  API: "#008297"
-  C#: "#008297"
-  Java: "#008297"
-  PHP: "#008297"
-  Python: "#008297"
-  Ruby: "#008297"
-  Design: "#4A4290"
-  Data Analysis: "#9F4B84"
-  Databases: "#9F4B84"
-  21st Century Skills: "#9B3B5A"
-  Business: "#9B3B5A"
-  Computer Science: "#9B3B5A"
-  Development Tools: "#9B3B5A"
-  Digital Literacy: "#9B3B5A"
-  Learning Resources: "#9B3B5A"
-  Quality Assurance: "#9B3B5A"
-  Security: "#9B3B5A"
-  Go: "#733A88"
-  Machine Learning: "#733A88"
-  Equity, Diversity, and Inclusion (EDI): "#733A88"
-  Android: "#30826C"
-  iOS: "#30826C"
 title: Treehouse
 subtitle: Total Points
 name: Joe Sharp
