@@ -2,6 +2,6 @@
 
 source 'https://rubygems.org'
 
-ruby '3.4.4'
+ruby File.read('.ruby-version').strip
 
 gem 'jekyll', '~> 4.4'
