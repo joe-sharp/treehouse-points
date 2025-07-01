@@ -130,47 +130,68 @@ function createPie(dataElement, pieElement) {
 
   var offset = 0;
   var colors = {};
-  colors['Android'] = '#5cb860';
-  colors['Business'] = '#f9845b';
-  colors['CSS'] = '#3659a2';
-  colors['Design'] = '#4a4290';
-  colors['Development Tools'] = '#9b3b5a';
-  colors['HTML'] = '#3659a2';
-  colors['iOS'] = '#53bbb4';
-  colors['Java'] = '#2c9676';
-  colors['Javascript'] = '#3659a2';
-  colors['PHP'] = '#7d669e';
+
+  // Frontend
+  colors['CSS'] = '#3659A2';
+  colors['HTML'] = '#3659A2';
+  colors['JavaScript'] = '#3659A2';
+  // Backend
+  colors['API'] = '#008297';
+  colors['C#'] = '#008297';
+  colors['Java'] = '#008297';
+  colors['PHP'] = '#008297';
   colors['Python'] = '#008297';
   colors['Ruby'] = '#008297';
-  colors['WordPress'] = '#838cc7';
-  colors['Digital Literacy'] = '#9b3b5a';
-  colors['C#'] = '#9e4d83'; // added here down 17.09.22.sp
+  // Design
+  colors['Design'] = '#4A4290';
+  // Data
+  colors['Data Analysis'] = '#9F4B84';
   colors['Databases'] = '#9F4B84';
-  colors['Game Development'] = '#20898c';
-  colors['Data Analysis'] = '#645a7e';
-  colors['Security'] = '#9b3b5a';
-  colors['Go'] = '#375eab';
-  colors['APIs'] = '#993c50';
-  colors['Virtual Reality'] = '#95D26C';
-  colors['Quality Assurance'] = '#80438E';
-  colors['Machine Learning'] = '#2D6853'; // 18.03.22.sp
-  colors['Computer Science'] = '#9b3b5a';
-  colors['21st Century Skills'] = '#9b3b5a';
+  // Fundamentals
+  colors['21st Century Skills'] = '#9B3B5A';
+  colors['Business'] = '#9B3B5A';
+  colors['Computer Science'] = '#9B3B5A';
+  colors['Development Tools'] = '#9B3B5A';
+  colors['Digital Literacy'] = '#9B3B5A';
+  colors['Learning Resources'] = '#9B3B5A';
+  colors['Quality Assurance'] = '#9B3B5A';
+  colors['Security'] = '#9B3B5A';
+  // Experimental
+  colors['Go'] = '#733A88';
+  colors['Machine Learning'] = '#733A88';
+  colors['Equity, Diversity, and Inclusion (EDI)'] = '#733A88';
+  // Mobile
+  colors['Android'] = '#30826C';
+  colors['iOS'] = '#30826C';
 
-  for(var i=0; i<listData.length; i++) {
-    var size = sliceSize(listData[i], listTotal);
-    var color = '#000000';
-    for (var c in colors) {
-      if (listNames[i].toLowerCase() === c.toLowerCase()) {
-        color = colors[c];
-      }
+  // Create array of objects with name, value, and color
+  var items = listNames.map((name, idx) => ({
+    name: name,
+    value: listData[idx],
+    color: colors[name] || '#000000'
+  }));
+
+  // Group items by color for pie chart
+  var colorGroups = {};
+  items.forEach(item => {
+    if (!colorGroups[item.color]) {
+      colorGroups[item.color] = [];
     }
+    colorGroups[item.color].push(item);
+  });
 
-    // make slices
-    iterateSlices(size, pieElement, offset, i, 0, color);
+  // Create flattened array grouped by color
+  var groupedItems = Object.values(colorGroups).flat();
 
-    // set legend colors
-    $(dataElement+" li:nth-child("+(i+1)+")").css("border-color", color);
+  // Draw pie slices in color groups
+  for(var i=0; i<groupedItems.length; i++) {
+    var size = sliceSize(groupedItems[i].value, listTotal);
+    iterateSlices(size, pieElement, offset, i, 0, groupedItems[i].color);
     offset += size;
+  }
+
+  // Set legend colors in original order
+  for(var i=0; i<items.length; i++) {
+    $(dataElement+" li:nth-child("+(i+1)+")").css("border-color", items[i].color);
   }
 }
