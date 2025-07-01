@@ -1,20 +1,6 @@
-const fallbackData = {
-  points: {
-    total: 19791,
-    Ruby: 3794,
-    JavaScript: 3128,
-    Python: 2688,
-    CSS: 1874,
-    Databases: 1441,
-    HTML: 1121,
-    Design: 951,
-    "Development Tools": 839,
-    Security: 776,
-    "Computer Science": 636,
-    "21st Century Skills": 441,
-    "Digital Literacy": 161
-  }
-};
+---
+---
+const fallbackData = {{ site.fallback_data | jsonify }};
 
 // edit username here
 const username = 'joesharp';
