@@ -1,22 +1,54 @@
+const fallbackData = {
+  points: {
+    total: 19791,
+    Ruby: 3794,
+    JavaScript: 3128,
+    Python: 2688,
+    CSS: 1874,
+    Databases: 1441,
+    HTML: 1121,
+    Design: 951,
+    "Development Tools": 839,
+    Security: 776,
+    "Computer Science": 636,
+    "21st Century Skills": 441,
+    "Digital Literacy": 161
+  }
+};
+
 // edit username here
 $.ajax('https://teamtreehouse.com/joesharp.json')
   .done(function(data) {
- // pull was a success
-  var items = [];
-  $.each( data, function( key, val ) {
-    if (key.toLowerCase() === 'points') {
-      $.each(val, function( key2, val2 ) {
-        if (val2 !== 0) {
-          if (key2.toLowerCase() !== 'total') {
-            items.push([key2,val2]);
-          } else {
-            $('strong.total').text(val2);
+    // pull was a success
+    var items = [];
+    $.each( data, function( key, val ) {
+      if (key.toLowerCase() === 'points') {
+        $.each(val, function( key2, val2 ) {
+          if (val2 !== 0) {
+            if (key2.toLowerCase() !== 'total') {
+              items.push([key2,val2]);
+            } else {
+              $('strong.total').text(val2);
+            }
           }
-        }
-      });
-    }
+        });
+      }
+    });
+    processAndDisplayData(items);
+  })
+  .fail(function() {
+    var items = [];
+    $.each(fallbackData.points, function(key, val) {
+      if (val !== 0 && key.toLowerCase() !== 'total') {
+        items.push([key, val]);
+      } else if (key.toLowerCase() === 'total') {
+        $('strong.total').text(val);
+      }
+    });
+    processAndDisplayData(items);
   });
 
+function processAndDisplayData(items) {
   // sort
   var sorted = [];
   if (items.length === 0) {
@@ -53,11 +85,7 @@ $.ajax('https://teamtreehouse.com/joesharp.json')
 
   // make pie
   createPie(".legend", ".pie");
-  })
-  .fail(function() {
-    $('.team-treehouse > a > h2').text("Could not connect. Username my be incorrect.");
-  })
-
+}
 
 function sliceSize(dataNum, dataTotal) {
   return (dataNum / dataTotal) * 360;
