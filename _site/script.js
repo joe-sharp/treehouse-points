@@ -42,7 +42,8 @@ fetch(`https://teamtreehouse.com/${username}.json`)
     });
     processAndDisplayData(items);
   })
-  .catch(() => {
+  .catch((error) => {
+    console.warn('Could not load live Treehouse data. Showing fallback data instead.', error);
     const items = [];
     Object.entries(fallbackData.points).forEach(([key, val]) => {
       if (val !== 0 && key.toLowerCase() !== 'total') {
@@ -76,20 +77,27 @@ function processAndDisplayData(items) {
       }
     }
   }
-  // make into html
-  const html = [];
-  html.push('<ul>');
-  for (const s in sorted) {
-    html.push('<li>');
-    html.push(`<em>${sorted[s][0]}</em>`);
-    html.push(`<span>${sorted[s][1]}</span>`);
-    html.push('</li>');
+
+  // Create legend using DocumentFragment for better performance
+  const fragment = document.createDocumentFragment();
+  const ul = document.createElement('ul');
+  for (const s of sorted) {
+    const li = document.createElement('li');
+    const em = document.createElement('em');
+    const span = document.createElement('span');
+
+    em.textContent = s[0];
+    span.textContent = s[1];
+    
+    li.appendChild(em);
+    li.appendChild(span);
+    ul.appendChild(li);
   }
-  html.push('</ul>');
+  fragment.appendChild(ul);
 
   // make legend
   const legendElem = document.querySelector('.legend');
-  if (legendElem) legendElem.insertAdjacentHTML('beforeend', html.join(''));
+  if (legendElem) legendElem.appendChild(fragment);
 
   // make pie
   createPie('.legend', '.pie');
