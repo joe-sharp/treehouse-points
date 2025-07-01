@@ -3,9 +3,14 @@
 <head>
   <title>{{ site.title }} {{ site.subtitle }}</title>
   <link href="style.css" rel="stylesheet">
+  <script src="pie-spinner.js"></script>
 </head>
 <body>
   {% include points.html site=site %}
-  <script src="script.js"></script>
+  <script>
+    injectSpinnerStyles();
+    showSpinner();
+  </script>
+  <script src="script.js.liquid"></script>
 </body>
 </html>

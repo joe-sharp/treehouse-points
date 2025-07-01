@@ -42,7 +42,8 @@ fetch(`https://teamtreehouse.com/${username}.json`)
     });
     processAndDisplayData(items);
   })
-  .catch(() => {
+  .catch((error) => {
+    console.warn('Could not load live Treehouse data. Showing fallback data instead.', error);
     const items = [];
     Object.entries(fallbackData.points).forEach(([key, val]) => {
       if (val !== 0 && key.toLowerCase() !== 'total') {
@@ -76,20 +77,27 @@ function processAndDisplayData(items) {
       }
     }
   }
-  // make into html
-  const html = [];
-  html.push('<ul>');
-  for (const s in sorted) {
-    html.push('<li>');
-    html.push(`<em>${sorted[s][0]}</em>`);
-    html.push(`<span>${sorted[s][1]}</span>`);
-    html.push('</li>');
+
+  // Create legend using DocumentFragment for better performance
+  const fragment = document.createDocumentFragment();
+  const ul = document.createElement('ul');
+  for (const s of sorted) {
+    const li = document.createElement('li');
+    const em = document.createElement('em');
+    const span = document.createElement('span');
+
+    em.textContent = s[0];
+    span.textContent = s[1];
+
+    li.appendChild(em);
+    li.appendChild(span);
+    ul.appendChild(li);
   }
-  html.push('</ul>');
+  fragment.appendChild(ul);
 
   // make legend
   const legendElem = document.querySelector('.legend');
-  if (legendElem) legendElem.insertAdjacentHTML('beforeend', html.join(''));
+  if (legendElem) legendElem.appendChild(fragment);
 
   // make pie
   createPie('.legend', '.pie');
@@ -138,40 +146,7 @@ function createPie(dataElement, pieElement) {
 
   const listTotal = listData.reduce((acc, val) => acc + val, 0);
   let offset = 0;
-  const colors = {
-    // Frontend
-    CSS: '#3659A2',
-    HTML: '#3659A2',
-    JavaScript: '#3659A2',
-    // Backend
-    API: '#008297',
-    'C#': '#008297',
-    Java: '#008297',
-    PHP: '#008297',
-    Python: '#008297',
-    Ruby: '#008297',
-    // Design
-    Design: '#4A4290',
-    // Data
-    'Data Analysis': '#9F4B84',
-    Databases: '#9F4B84',
-    // Fundamentals
-    '21st Century Skills': '#9B3B5A',
-    Business: '#9B3B5A',
-    'Computer Science': '#9B3B5A',
-    'Development Tools': '#9B3B5A',
-    'Digital Literacy': '#9B3B5A',
-    'Learning Resources': '#9B3B5A',
-    'Quality Assurance': '#9B3B5A',
-    Security: '#9B3B5A',
-    // Experimental
-    Go: '#733A88',
-    'Machine Learning': '#733A88',
-    'Equity, Diversity, and Inclusion (EDI)': '#733A88',
-    // Mobile
-    Android: '#30826C',
-    iOS: '#30826C',
-  };
+  const colors = {{ site.pie_colors | jsonify }};
 
   // Create array of objects with name, value, and color
   const items = listNames.map((name, idx) => ({
@@ -198,6 +173,7 @@ function createPie(dataElement, pieElement) {
     iterateSlices(size, pieElement, offset, i, 0, item.color);
     offset += size;
   });
+  removeSpinner();
 
   // Set legend colors in original order
   items.forEach((item, i) => {
