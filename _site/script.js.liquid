@@ -42,25 +42,7 @@ fetch(`https://teamtreehouse.com/${username}.json`)
 
 function processAndDisplayData(items) {
   // sort
-  let sorted = [];
-  if (items.length === 0) {
-    sorted = items;
-  } else {
-    sorted = [items.shift()];
-  }
-
-  while (items.length > 0) {
-    for (let i = 0; i < sorted.length; i++) {
-      if (items[0][1] > sorted[i][1]) {
-        sorted.splice(i, 0, items.shift());
-        break;
-      }
-      if (i === sorted.length - 1) {
-        sorted.push(items.shift());
-        break;
-      }
-    }
-  }
+  const sorted = items.sort((a, b) => b[1] - a[1]);
 
   // Create legend using DocumentFragment for better performance
   const fragment = document.createDocumentFragment();
