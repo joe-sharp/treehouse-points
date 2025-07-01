@@ -20,7 +20,7 @@ body {
   body {
     background: #222222;
   }
-  body body, body em, body h1, body h2, body span, body strong {
+  body em, body h1, body h2, body span, body strong, body p, body li, body ul, body ol, body blockquote {
     color: #f9f9f9;
   }
   body .pie::before {
@@ -28,9 +28,6 @@ body {
   }
   body .slice span {
     background-color: #f9f9f9;
-  }
-  body .legend li {
-    border-left: 1.25em solid #f9f9f9;
   }
 }
 body a {
@@ -101,7 +98,7 @@ body .team-treehouse h2 {
   height: 1.25em;
   margin-bottom: 0.7em;
   padding-left: 0.5em;
-  border-left: 1.25em solid #222222;
+  border-left: 1.25em solid #5d5d5d;
 }
 .legend em {
   font-style: normal;

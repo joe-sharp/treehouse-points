@@ -6,6 +6,7 @@
 // properties
 $color-background: #f9f9f9;
 $color-primary: #222222;
+$color-secondary: #5d5d5d;
 $color-background-dark: #222222;
 $color-primary-dark: #f9f9f9;
 $size-circle: 12.5em;
@@ -30,7 +31,7 @@ body {
   @media (prefers-color-scheme: dark) {
     background: $color-background-dark;
 
-    body, em, h1, h2, span, strong {
+    em, h1, h2, span, strong, p, li, ul, ol, blockquote {
       color: $color-primary-dark;
     }
     .pie::before {
@@ -38,9 +39,6 @@ body {
     }
     .slice span {
       background-color: $color-primary-dark;
-    }
-    .legend li {
-      border-left: 1.25em solid $color-primary-dark;
     }
   }
 
@@ -123,7 +121,7 @@ body {
     height: 1.25em;
     margin-bottom: 0.7em;
     padding-left: 0.5em;
-    border-left: 1.25em solid $color-primary;
+    border-left: 1.25em solid $color-secondary;
   }
   em {
     font-style: normal;
