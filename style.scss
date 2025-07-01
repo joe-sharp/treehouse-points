@@ -1,6 +1,6 @@
 ---
 ---
-
+@use "sass:math";
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
 
 // properties
@@ -74,7 +74,7 @@ body {
   position: absolute;
   width: $size-circle;
   height: $size-circle;
-  clip: rect(0px, $size-circle, $size-circle, calc($size-circle / 2));
+  clip: rect(0px, $size-circle, $size-circle, math.div($size-circle, 2));
   animation: bake-pie 1s;
 
   span {
@@ -86,7 +86,7 @@ body {
     width: $size-circle;
     height: $size-circle;
     border-radius: 50%;
-    clip: rect(0px, $size-circle, $size-circle, calc($size-circle / 2));
+    clip: rect(0px, $size-circle, $size-circle, math.div($size-circle, 2));
   }
 }
 
