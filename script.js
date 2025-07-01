@@ -206,6 +206,7 @@ function createPie(dataElement, pieElement) {
     iterateSlices(size, pieElement, offset, i, 0, item.color);
     offset += size;
   });
+  removeSpinner();
 
   // Set legend colors in original order
   items.forEach((item, i) => {
