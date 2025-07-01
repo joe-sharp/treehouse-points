@@ -2,9 +2,7 @@
 ---
 const fallbackData = {{ site.fallback_data | jsonify }};
 
-// edit username here
-const username = 'joesharp';
-fetch(`https://teamtreehouse.com/${username}.json`)
+fetch(`{{ site.url }}.json`)
   .then(response => {
     if (!response.ok) throw new Error('Network response was not ok');
     return response.json();
