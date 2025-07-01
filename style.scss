@@ -3,16 +3,18 @@
 @use "sass:math";
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
 
-// properties
+// Colors
 $color-background: #f9f9f9;
 $color-primary: #222222;
-$color-background-dark: #222222;
-$color-primary-dark: #f9f9f9;
+$color-secondary: #5d5d5d;
+$color-dark-bg: #222222;
+$color-dark-text: #f9f9f9;
+
+// Dimensions
 $size-circle: 12.5em;
 $size-thickness: 2.5em;
 $size-inner: $size-circle - $size-thickness * 2;
 
-// resets
 * {
   padding: 0;
   margin: 0;
@@ -20,50 +22,44 @@ $size-inner: $size-circle - $size-thickness * 2;
   color: $color-primary;
 }
 
-// clearfix
-.group:after {content:"";display:table;clear:both;}
+.group:after { content:""; display:table; clear:both; }
 
-// general
 body {
   font-family: "Open Sans", Arial;
   background: $color-background;
-  @media (prefers-color-scheme: dark) {
-    background: $color-background-dark;
 
-    * {
-      color: $color-primary-dark;
+  @media (prefers-color-scheme: dark) {
+    background: $color-dark-bg;
+    em, h1, h2, span, strong, p, li, ul, ol, blockquote {
+      color: $color-dark-text;
+    }
+    .pie::before {
+      background: $color-dark-bg;
+    }
+    .slice span {
+      background-color: $color-dark-text;
     }
   }
 
-  a {
-    text-decoration: none;
-  }
+  a { text-decoration: none; }
 
   .team-treehouse {
-
-    h1, h2 {
-      text-align: center;
-    }
-    h2 {
-      font-weight: normal;
-    }
+    h1, h2 { text-align: center; }
+    h2 { font-weight: normal; }
   }
 }
 
-
-// pie chart
 .pieChart {
   width: $size-circle + 13em;
   margin: 0 auto;
   padding-top: 1em;
 }
 
-// pie
 .pie {
   height: $size-circle;
   width: $size-circle;
   position: relative;
-  float:left;
+  float: left;
 
   &::before {
     content: "";
@@ -76,9 +72,6 @@ body {
     border-radius: 50%;
     top: $size-thickness;
     left: $size-thickness;
-    @media (prefers-color-scheme: dark) {
-      background: $color-background-dark;
-    }
   }
 }
 
@@ -99,17 +92,13 @@ body {
     height: $size-circle;
     border-radius: 50%;
     clip: rect(0px, $size-circle, $size-circle, math.div($size-circle, 2));
-    @media (prefers-color-scheme: dark) {
-      background-color: white;
-    }
   }
 }
 
-// legend
 .legend {
   width: 13em;
   padding-left: 1em;
-  float:left;
+  float: left;
 
   ul {
     list-style-type: none;
@@ -120,14 +109,9 @@ body {
     height: 1.25em;
     margin-bottom: 0.7em;
     padding-left: 0.5em;
-    border-left: 1.25em solid black;
-    @media (prefers-color-scheme: dark) {
-      border-left: 1.25em solid white;
-    }
+    border-left: 1.25em solid $color-secondary;
   }
-  em {
-    font-style: normal;
-  }
+  em { font-style: normal; }
   span {
     float: right;
     font-weight: bold;

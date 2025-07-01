@@ -20,8 +20,14 @@ body {
   body {
     background: #222222;
   }
-  body * {
+  body em, body h1, body h2, body span, body strong, body p, body li, body ul, body ol, body blockquote {
     color: #f9f9f9;
+  }
+  body .pie::before {
+    background: #222222;
+  }
+  body .slice span {
+    background-color: #f9f9f9;
   }
 }
 body a {
@@ -58,11 +64,6 @@ body .team-treehouse h2 {
   top: 2.5em;
   left: 2.5em;
 }
-@media (prefers-color-scheme: dark) {
-  .pie::before {
-    background: #222222;
-  }
-}
 
 .slice {
   position: absolute;
@@ -82,11 +83,6 @@ body .team-treehouse h2 {
   border-radius: 50%;
   clip: rect(0px, 12.5em, 12.5em, 6.25em);
 }
-@media (prefers-color-scheme: dark) {
-  .slice span {
-    background-color: white;
-  }
-}
 
 .legend {
   width: 13em;
@@ -102,12 +98,7 @@ body .team-treehouse h2 {
   height: 1.25em;
   margin-bottom: 0.7em;
   padding-left: 0.5em;
-  border-left: 1.25em solid black;
-}
-@media (prefers-color-scheme: dark) {
-  .legend li {
-    border-left: 1.25em solid white;
-  }
+  border-left: 1.25em solid #5d5d5d;
 }
 .legend em {
   font-style: normal;
