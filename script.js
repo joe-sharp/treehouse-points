@@ -42,7 +42,8 @@ fetch(`https://teamtreehouse.com/${username}.json`)
     });
     processAndDisplayData(items);
   })
-  .catch(() => {
+  .catch((error) => {
+    console.warn('Could not load live Treehouse data. Showing fallback data instead.', error);
     const items = [];
     Object.entries(fallbackData.points).forEach(([key, val]) => {
       if (val !== 0 && key.toLowerCase() !== 'total') {
