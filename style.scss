@@ -6,6 +6,8 @@
 // properties
 $color-background: #f9f9f9;
 $color-primary: #222222;
+$color-background-dark: #222222;
+$color-primary-dark: #f9f9f9;
 $size-circle: 12.5em;
 $size-thickness: 2.5em;
 $size-inner: $size-circle - $size-thickness * 2;
@@ -25,6 +27,13 @@ $size-inner: $size-circle - $size-thickness * 2;
 body {
   font-family: "Open Sans", Arial;
   background: $color-background;
+  @media (prefers-color-scheme: dark) {
+    background: $color-background-dark;
+
+    * {
+      color: $color-primary-dark;
+    }
+  }
 
   a {
     text-decoration: none;
@@ -67,6 +76,9 @@ body {
     border-radius: 50%;
     top: $size-thickness;
     left: $size-thickness;
+    @media (prefers-color-scheme: dark) {
+      background: $color-background-dark;
+    }
   }
 }
 
@@ -87,6 +99,9 @@ body {
     height: $size-circle;
     border-radius: 50%;
     clip: rect(0px, $size-circle, $size-circle, math.div($size-circle, 2));
+    @media (prefers-color-scheme: dark) {
+      background-color: white;
+    }
   }
 }
 
@@ -106,6 +121,9 @@ body {
     margin-bottom: 0.7em;
     padding-left: 0.5em;
     border-left: 1.25em solid black;
+    @media (prefers-color-scheme: dark) {
+      border-left: 1.25em solid white;
+    }
   }
   em {
     font-style: normal;
